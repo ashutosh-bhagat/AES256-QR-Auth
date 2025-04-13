@@ -3,18 +3,10 @@
 import qrcode
 from encryptor import encrypt_data
 
-def generate_qr(user_data: dict, filename="qr.png"):
-    # Convert user data to string
-    data_str = f"{user_data['name']}|{user_data['email']}|{user_data['timestamp']}"
-    
-    # Encrypt the data
-    encrypted = encrypt_data(data_str)
+data_to_encrypt = "Ashu_Authenticated"  # 🔐 Replace this with real payload
+encrypted_data = encrypt_data(data_to_encrypt)
 
-    # Generate QR code
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(encrypted)
-    qr.make(fit=True)
-
-    img = qr.make_image(fill="black", back_color="white")
-    img.save(filename)
-    print(f"QR code saved as {filename}")
+# ✅ Save QR Code
+img = qrcode.make(encrypted_data)
+img.save("qr.png")
+print("[✅] QR code generated and saved as qr.png")
